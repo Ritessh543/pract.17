@@ -1,0 +1,10 @@
+name: first_workflow
+
+on: workflow_dispatch
+
+jobs: 
+    firstjob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: print message
+              run: echo " hello GA"
