@@ -1,10 +1,23 @@
 name: first_workflow
 
-on: workflow_dispatch
+on: push
 
 jobs: 
     firstjob:
         runs-on: ubuntu-latest
         steps:
-            - name: print message
-              run: echo " hello GA"
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup nodejs
+              uses: actions/setup-node@v4
+              with: 
+                node-version: 18
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: run app
+              run: npm start
+
+            
