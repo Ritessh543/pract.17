@@ -1,23 +1,34 @@
-name: first_workflow
+name: Artifact Demo
 
-on: push
+on:
+  workflow_dispatch:
 
-jobs: 
-    firstjob:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-            - name: Setup nodejs
-              uses: actions/setup-node@v4
-              with: 
-                node-version: 18
+    steps:
+      - name: Create File
+        run: echo "Hello Ritesh from GitHub Actions" > hello.txt
 
-            - name: Install dependencies
-              run: npm install
+      - name: Display File
+        run: cat hello.txt
 
-            - name: run app
-              run: npm start
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-file
+          path: hello.txt
 
-            
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-file
+
+      - name: Verify File
+        run: cat hello.txt
