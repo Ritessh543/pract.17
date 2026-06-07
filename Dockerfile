@@ -8,11 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - run: echo " hello ritesh" > hello.txt
 
-      - name: Build Docker Image
-        run: docker build -t my-node-app .
-
-      - name: Verify Image
-        run: docker images
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-file
+          path: hello.tx
