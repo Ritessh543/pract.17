@@ -24,3 +24,6 @@ jobs:
       - name: Push Image
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/github-actions-demo:latest
+
+
+          
